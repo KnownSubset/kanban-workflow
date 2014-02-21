@@ -9,6 +9,10 @@ function exists(selector) {
   return !!find(selector).length;
 }
 
+function find(selector) {
+  return this.$(selector);
+}
+
 function getAssertionMessage(actual, expected, message) {
   return message || QUnit.jsDump.parse(expected) + " expected but was " + QUnit.jsDump.parse(actual);
 }

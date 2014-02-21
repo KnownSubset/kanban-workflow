@@ -22,8 +22,8 @@ test("changing colors", function(){
 test("className", function(){
   // first call to this.$() renders the component.
   ok(this.$().is('.pretty-color'));
-  ok(findWithAssert('.pretty-color'));
-  ok(findWithAssert('.pretty-colors'));
+  ok(exists('.pretty-color'));
+  ok(!exists('.pretty-colors'));
 });
 
 test("template", function(){
