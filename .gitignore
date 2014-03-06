@@ -15,6 +15,9 @@
 #vagrant
 Vagrantfile
 /.vagrant
+._*
+
+npm-debug.log
 
 # misc
 /.sass-cache

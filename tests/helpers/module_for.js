@@ -120,6 +120,18 @@ export function moduleForModel(name, description, callbacks) {
   });
 }
 
+export function moduleForRoute(name, description, callbacks) {
+  moduleFor('route:' + name, description, callbacks, function(container, context) {
+    // custom model specific awesomeness
+    container.register('store:main', DS.Store);
+    container.register('adapter:application', DS.FixtureAdapter);
+
+    context.__setup_properties__.store = function(){
+      return container.lookup('store:main');
+    };
+  });
+}
+
 export function moduleForComponent(name, description, callbacks) {
   moduleFor('component:' + name, description, callbacks, function(container, context) {
     var templateName = 'template:components/' + name;

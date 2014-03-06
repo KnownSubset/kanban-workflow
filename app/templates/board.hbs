@@ -1,0 +1,7 @@
+{{model.name}}
+
+{{#bs-button id='add_column' type="btn btn-small" clicked="addColumn" }}<i class="fa fa-copy"></i>{{/bs-button}}
+
+{{#each model.columns itemController='column'}}
+    {{view 'column'}}
+{{/each}}
