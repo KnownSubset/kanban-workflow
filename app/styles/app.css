@@ -3,6 +3,49 @@ html, body {
     margin: 20px;
 }
 
+.board {
+    color: #f5f5f5;
+    padding: 10px;
+    margin: 10px;
+    background-color: #393939;
+    border-color: #000000;
+    float: left;
+}
+
+.board input {
+    color: #000000;
+}
+
+.column {
+    margin: 5px;
+    padding: 5px;
+    background-color: whitesmoke;
+    border-color: #000000;
+    float: left;
+}
+
+.card {
+    margin: 5px;
+    padding: 5px;
+    background-color: lightslategray;
+    border-color: #000000;
+}
+.wide {
+    width: 100%;
+}
+
+.outlined {
+    outline: white solid 1px;
+}
+.editable-field {
+    margin: 1px;
+    padding: 6px 3px;
+}
+
+span.input-group-addon {
+    padding: 3px 0px;
+}
+
 @keyframes domChanged { from { background: yellow; } }
 @-webkit-keyframes domChanged { from { background: yellow; } }
 .ember-view { animation: domChanged 1s; -webkit-animation: domChanged 1s; }

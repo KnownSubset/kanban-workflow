@@ -138,6 +138,7 @@ export function moduleForComponent(name, description, callbacks) {
 
     var template = resolver.resolve(templateName);
 
+    container.register('component-lookup:main', Ember.ComponentLookup);
     if (template) {
       container.register(templateName, template);
       container.injection('component:' + name, 'template', templateName);

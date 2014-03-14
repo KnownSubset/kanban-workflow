@@ -1,6 +1,7 @@
 `import Board from 'appkit/models/board'`
 `import Column from 'appkit/models/column'`
 `import Card from 'appkit/models/card'`
+`import KeyCodes from 'appkit/helpers/keyCodes'`
 
 App = null
 
@@ -38,11 +39,26 @@ test('Board renders out all current columns', 1, ->
 test('User can add a column to the board', 1, ->
   board = Board.FIXTURES[0]
   visit("/board/#{board.id}")
-  click("div.board button#add_column")
+  .click("div.board button#add_column")
   andThen ->
     columnElements = find('div.board div.column')
 
     equal(columnElements.length, 2, "there should be another column")
 
+)
+
+test("User can update the board's name", 1, ->
+  board = Board.FIXTURES[0]
+  newBoardName = "blah blah blah"
+  visit("/board/#{board.id}")
+  andThen ->
+    field = find('div.board div.editable_text_field')
+    field.trigger('mouseenter')
+    click("div.board div.editable_text_field")
+    fillIn('div.board input.editable-field', newBoardName)
+    keyEvent('input:last', null, 'keydown', KeyCodes.tab)
+
+    andThen ->
+      ok(find("div.board:contains('#{newBoardName}')".length))
 )
 

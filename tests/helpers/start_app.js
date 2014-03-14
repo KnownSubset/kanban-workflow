@@ -4,7 +4,9 @@ import Router from 'appkit/router';
 function startApp(attrs) {
   var App;
 
-  var attributes = Ember.merge({
+  //Ember.FEATURES['ember-testing-routing-helper'] = true;
+  //Ember.FEATURES['ember-testing-triggerEvent-helper'] = true;
+    var attributes = Ember.merge({
     // useful Test defaults
     rootElement: '#ember-testing',
     LOG_ACTIVE_GENERATION:false,

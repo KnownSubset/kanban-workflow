@@ -4,3 +4,4 @@
 // endpoint in test than in production.
 //
 // window.ENV.public_key = '123456'
+window.ENV = {FEATURES: {'ember-testing-triggerEvent-helper': true}};

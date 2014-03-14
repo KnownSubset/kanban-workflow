@@ -1,7 +1,11 @@
-{{model.name}}
+{{hover-aware-text-field model=model.name}}
 
 {{#bs-button id='add_column' type="btn btn-small" clicked="addColumn" }}<i class="fa fa-copy"></i>{{/bs-button}}
 
-{{#each model.columns itemController='column'}}
-    {{view 'column'}}
-{{/each}}
+<div class="container-fluid">
+  <div class='row'>
+    {{#each model.columns itemController='column'}}
+      {{view 'column' class='col-md-3'}}
+    {{/each}}
+  </div>
+</div>
