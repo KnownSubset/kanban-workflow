@@ -46,7 +46,7 @@ asyncTest("Removing a column deletes it from the store", 4, () ->
       start()
 )
 
-asyncTest("Removing a column removes it from the column it belongs to", 1, () ->
+asyncTest("Removing a column removes it from the board it belongs to", 1, () ->
   Em.run -> store.find('column', Column.FIXTURES[0].id)
     .then (column)->
       controller.set('model', column)
