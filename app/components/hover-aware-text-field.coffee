@@ -1,24 +1,9 @@
 `import KeyCodes from 'appkit/helpers/keyCodes'`
+`import Hover from 'appkit/mixins/hover'`
 
-HoverAwareTextField = Ember.Component.extend({
+HoverAwareTextField = Ember.Component.extend(Hover, {
   classNames: ["editable_text_field"],
   layoutName: "hover-aware-text-field",
-  isEditing: false,
-  isEditable: false,
-  model: null,
-  board: null,
-
-  click: () ->
-    if @get('isEditable') then @set('isEditing', true)
-  mouseEnter: () ->
-    @set('isEditable', true)
-  mouseLeave: () ->
-    @set('isEditable', false) if not @isEditing
-  keyDown: (e) ->
-    switch e.keyCode
-      when KeyCodes.escape, KeyCodes.enter, KeyCodes.tab
-        @set('isEditable', false)
-        @set('isEditing', false)
 
 });
 

@@ -2,6 +2,6 @@
 `import ValuePresence from 'appkit/mixins/presence'`
 `import Validator from 'appkit/mixins/valid'`
 
-ValidInputTextField = Ember.TextField.extend(ValuePresence, Validator);
+ValidInputTextArea = Ember.TextArea.extend(ValuePresence, Validator);
 
-`export default ValidInputTextField`
+`export default ValidInputTextArea`

@@ -13,6 +13,9 @@ CardController = BasicController.extend({
           cards.setObjects(cards.rejectBy('id', card.get('id')))
           column.save()
       card.deleteRecord()
+
+    confirm: -> @get('model').save()
+    undo: -> @get('model').rollback()
   }
 })
 

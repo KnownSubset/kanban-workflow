@@ -44,7 +44,7 @@ test("should be a extension of Ember's BasicView", () ->
   ok(columnView instanceof BoardView)
 )
 
-test("Creating a column should insert a div", () ->
+test("Creating a board should insert a div", () ->
 
   ok(view)
   ok(exists('.board'))
@@ -151,4 +151,11 @@ test("There should be a div for each column in the board", () ->
   wait()
 
   equal(find('.column').length, board.columns.length)
+)
+
+test("Creating a card should insert a div", () ->
+  click("button:contains('Create Card')")
+
+  andThen ->
+    equal(controller.get('sendArray.firstObject'), 'addCard', "The controller should have been sent the addCard action")
 );

@@ -15,6 +15,20 @@ BoardController = BasicController.extend({
 
     remove: ->
       @get('model').deleteRecord()
+
+    addCard: ->
+      board = @get('model')
+      store = @get('store')
+      columns = board.get('columns')
+      firstCol = columns.get('firstObject')
+      card = store.createRecord('card', {name: 'New Card', description: 'New Card', createdAt: new Date(), column: firstCol})
+      card.save()
+        .then -> firstCol.get('cards')
+        .then((cards) ->
+            cards.pushObject(card)
+            card.set('column', firstCol)
+          )
+      false
   }
 })
 
