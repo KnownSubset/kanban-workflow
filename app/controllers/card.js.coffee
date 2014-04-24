@@ -9,16 +9,14 @@ CardController = BasicController.extend({
     remove: () ->
       card = @get('model')
       card.get('column')
+      .then (column) ->
+        card.destroyRecord()
+        column.reload()
 
-      #Commenting this out because I'm not convinced it is entirely necessary
-      #Deleting the card seems to handle this just fine. Leaving it in so that it can be reviewed in case I'm missing
-      #something -DS.
-
-      #  .then (column) -> column.get('cards').then (cards) ->
-      #    cards.setObjects(cards.rejectBy('id', card.get('id')))
-      #    column.save()
-
-      card.deleteRecord()
+      #.then ((column) -> column.get('cards'))
+      #  .then ((cards) -> cards.remove(card))
+      #    .then -> column.save()
+      false
 
     confirm: -> @get('model').save()
     undo: -> @get('model').rollback()
