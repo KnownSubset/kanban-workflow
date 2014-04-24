@@ -6,7 +6,7 @@ BoardRoute = BasicRoute.extend({
     @get('store').find('board', board_id)###
 
   actions: {
-    showCardDetails: -> @showModal(this, 'card_display')
+    showCardDetails: (card) -> @showCardModal(@, 'card_display', card)
     closeModal: -> this.render('modal/hide_modal', {into: 'modal/modal', outlet: 'modalBody'})
   }
 })

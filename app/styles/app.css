@@ -28,6 +28,16 @@ html, body {
     minwidth: 200px;
 }
 
+.modal-content {
+    color: black;
+}
+
+.card-details td{
+    padding: 2px;
+}
+
+
+
 .card {
     margin: 5px;
     padding: 5px;
