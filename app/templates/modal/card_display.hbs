@@ -1,0 +1,15 @@
+<div class="modal-header">
+    {{#bs-button type="button" clicked="closeModal" }}<i class="fa fa-times-circle-o"></i>{{/bs-button}}
+    <h4 class="modal-title">{{title}}</h4>
+</div>
+<div class="modal-body" tabindex="-1">
+    Modal!!
+</div>
+<div class="modal-footer">
+  {{#bs-button type="primary" data-loading-text="Loading..." loading=loadingState title="Select" clicked="select" }}
+      <i class="fa fa-check-circle-o pull-left"></i>&nbsp;{{selectButtonText}}
+  {{/bs-button}}
+  {{#bs-button type="primary" title="Cancel" clicked="closeModal" }}
+      <i class="fa fa-times-circle-o pull-left"></i>&nbsp;{{cancelButtonText}}
+  {{/bs-button}}
+</div>

@@ -1,0 +1,11 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content" tabindex="-1">
+      {{outlet modalBody}}
+
+      {{#each errors}}
+        {{bs-alert message=this type="error" dismissAfter=10 fade=true}}
+      {{/each}}
+    </div>
+  </div>
+</div>

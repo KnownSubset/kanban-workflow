@@ -10,5 +10,9 @@ BasicRoute = Ember.Route.extend({
       if (controller && controller.onShow) then controller.onShow()
       controller.set('flashMessage', null)
 
+  actions:
+    showModal: (name, model)->
+      @showModal(@, name, model)
+
 });
 `export default BasicRoute`

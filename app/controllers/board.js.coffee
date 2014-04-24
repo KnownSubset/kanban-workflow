@@ -10,6 +10,7 @@ BoardController = BasicController.extend({
       column.save()
         .then -> board.get('columns')
         .then((columns) -> columns.pushObject(column))
+        .then((columns) -> columns.save())
         #.then -> board.save()
       false
 
