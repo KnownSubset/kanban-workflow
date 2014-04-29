@@ -4,8 +4,8 @@
 </div>
 <div class="modal-body" tabindex="-1">
     <table class="card-details">
-        <tr><td>Card Name:</td><td>{{model.name}}</td></tr>
-        <tr><td>Description:</td><td>{{model.description}}</td></tr>
+        <tr><td>Card Name:</td><td>{{hover-aware-text-field model=model.name}}</td></tr>
+        <tr><td>Description:</td><td>{{hover-aware-text-area model=model.description}}</td></tr>
         <tr><td>Created On:</td><td>{{model.createdAt}}</td></tr>
         <tr><td>Current Column:</td><td>{{model.column.name}}</td></tr>
     </table>

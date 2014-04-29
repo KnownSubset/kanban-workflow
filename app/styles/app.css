@@ -36,7 +36,9 @@ html, body {
     padding: 2px;
 }
 
-
+.card-details .outlined{
+    outline: black solid 1px;
+}
 
 .card {
     margin: 5px;
