@@ -30,8 +30,8 @@ Valid = Em.Mixin.create({
     switch e.keyCode
       when KeyCodes.escape
         @set('value', @originalValue)
-        @model.save().then ->
-          $control.blur()
+        #@get('model').save().then ->
+        $control.blur()
       when KeyCodes.enter, KeyCodes.tab then $control.blur()
 
   regex: -> RegExp(@get('invalidPattern'))

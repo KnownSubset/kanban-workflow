@@ -6,8 +6,8 @@
   @namespace fullConnect
   @module fullConnect
 ###
-`import Controller from 'appkit/controllers/basic'`
+`import BasicController from 'appkit/controllers/basic'`
 
-ModalController = Controller.extend({})
+ModalController = BasicController.extend({})
 
 `export default ModalController`

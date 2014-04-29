@@ -1,5 +1,10 @@
-<div class="remove" type="button" {{action "remove" }}><i class="fa fa-times-circle-o"></i></div>
-<button type="button" class="btn btn-default" {{action "showCardDetails" this}}><i class="icon-signin"></i> Details</button>
-{{hover-aware-text-field model=model.name}}
-
-{{hover-aware-text-area model=description}}
+<div class='row'>
+  <div class='col-md-9'>
+    <button class='icon' {{action 'showCardDetails' model}}><i class='fa fa-search'></i> {{model.name}}</button>
+  </div>
+  <div class='col-md-offset-1 col-md-1'>
+    <button class='icon' {{action 'remove'}}><i class='fa fa-times-circle-o'></i></button>
+  </div>
+</div>
+<br>
+<div>{{description}}</div>

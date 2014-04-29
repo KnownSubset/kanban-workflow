@@ -1,6 +1,4 @@
-`import BasicView from 'appkit/views/basic'`
-
-ColumnView = BasicView.extend({
+ColumnView = Ember.View.extend({
   templateName: 'column',
   classNames: ['column'],
 })

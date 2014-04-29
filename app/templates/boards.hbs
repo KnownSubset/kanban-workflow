@@ -1,4 +1,4 @@
-{{#bs-button id='add_column' type="btn btn-small" clicked="addBoard" }}<i class="fa fa-copy"></i>Create Board{{/bs-button}}
+{{#bs-button type="btn btn-small" clicked="addBoard" }}<i class="fa fa-copy"></i>Create Board{{/bs-button}}
 
 {{#each board in model}}
   {{#link-to 'board' board}}<div class="board col-md-2 col-xs-12">{{board.name}}</div>{{/link-to}}

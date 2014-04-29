@@ -1,35 +1,23 @@
-`import Column from 'appkit/models/column'`
-`import BasicController from 'appkit/controllers/basic'`
-
-BoardController = BasicController.extend({
+BoardController = Ember.Controller.extend({
   actions: {
+
     addColumn: ->
       board = @get('model')
       store = @get('store')
-      column = store.createRecord('column', {name: 'column', kind:'manual',createdAt: new Date(), board: board})
-      column.save()
-        .then -> board.get('columns')
-        .then((columns) -> columns.pushObject(column))
-        .then((columns) -> columns.save())
-        #.then -> board.save()
+      column = store.createRecord('column', {name: 'column', kind:'manual', createdAt: new Date(), board: board})
+      Em.RSVP.all([board.get('columns'), column.save()]).then (promises) ->
+        [columns, column] = promises
+        #columns.pushObject(column)
       false
 
-    remove: ->
-      @get('model').deleteRecord()
-
-    addCard: ->
+    remove: (column) ->
       board = @get('model')
-      store = @get('store')
-      columns = board.get('columns')
-      firstCol = columns.objectAt(0)
-      card = store.createRecord('card', {name: 'New Card', description: 'New Card', createdAt: new Date(), column: firstCol})
-      card.save()
-        .then -> firstCol.get('cards')
-        .then((cards) -> cards.addObject(card))
-        .then((cards) -> cards.save())
-        #.then -> card.set('column', firstCol)
-            #card.save()
+      board.get('columns').then (columns)->
+        columns.removeObject(column)
+        column.deleteRecord()
+        column.save()
       false
+
   }
 })
 

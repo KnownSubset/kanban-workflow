@@ -1,6 +1,4 @@
-`import BasicRoute from 'appkit/routes/basic'`
-
-BoardsRoute = BasicRoute.extend({
+BoardsRoute = Ember.Route.extend({
   model: -> @get('store').findAll('board')
 });
 `export default BoardsRoute`

@@ -1,14 +1,4 @@
-###
-  A base class for helping us display modal content
-
-  @class ModalBodyView
-  @extends FullConnect.View
-  @namespace FullConnect
-  @module FullConnect
-###
-`import BasicView from 'appkit/views/basic'`
-
-ModalBodyView = BasicView.extend({
+ModalBodyView = Ember.View.extend({
 
   # Focus on first element
   didInsertElement: () ->

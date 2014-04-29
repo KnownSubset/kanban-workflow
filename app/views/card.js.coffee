@@ -1,6 +1,4 @@
-`import BasicView from 'appkit/views/basic'`
-
-CardView = BasicView.extend({
+CardView = Ember.View.extend({
   templateName: 'card',
   classNames: ['card'],
 

@@ -1,0 +1,10 @@
+<div class="modal-header">
+  <button type="button" class="close" {{action 'closeModal'}} aria-hidden="true">&times;</button>
+  <h4 class="modal-title">{{title}}</h4>
+
+  <div class="errors">
+    {{#each alert in alerts}}
+      {{bs-alert message=alert.message type=alert.type fade=alert.fade dismiss=alert.dismiss closedParamBinding=alert closed='closeAlert'}}
+    {{/each}}
+  </div>
+</div>

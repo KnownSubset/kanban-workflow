@@ -1,7 +1,9 @@
-<div class="remove" type="button" {{action "remove" }}><i class="fa fa-times-circle-o"></i></div>
+{{#bs-button type="button" clicked="remove" }}<i class="fa fa-times-circle-o"></i>{{/bs-button}}
 
 {{model.name}}
 
 {{#each model.cards itemController='card'}}
-  {{view 'card'}}
+  {{#unless model.archived}}
+    {{view 'card'}}
+  {{/unless}}
 {{/each}}

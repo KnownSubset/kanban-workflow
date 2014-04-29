@@ -1,21 +1,51 @@
-<div class="modal-header">
-    {{#bs-button type="button" clicked="closeModal" }}<i class="fa fa-times-circle-o"></i>{{/bs-button}}
-    <h4 class="modal-title">{{title}}</h4>
+<div class="modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      {{partial 'modal/header'}}
+
+      <div class="modal-body container-fluid">
+        <div class='row'>
+          <div class="col-md-10">
+            <div class='row'>
+              <div class='col-md-3'>Card Name:</div>
+              <div class='col-md-9'>{{hover-aware-text-field model=model.name placeholderText="Enter a card name"}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Description:</div>
+              <div class='col-md-9'>{{hover-aware-text-area model=model.description placeholderText="Enter a card description"}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Created On:</div>
+              <div class='col-md-9'>{{model.createdAt}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Current Column:</div>
+              <div class='col-md-9'>{{model.column.name}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Comments:</div>
+              <div class='col-md-9'>{{hover-aware-text-area model=model.comments placeholderText="Enter a comment"}}</div>
+            </div>
+            <div class='row'>
+              <div class='col-md-3'>Activity:</div>
+              <div class='col-md-9'>
+                {{#each activity in model.activityStream}}
+                  Some user made changes - {{activity.date}} {{activity.activity}}<br/>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+          <div class="card-actions row col-md-2">
+            {{bs-button size="lg" block=true type='danger' icon='fa fa-trash-o' title="Delete" clicked="remove" }}
+            {{bs-button size="lg" block=true icon='fa fa-archive' title="Archive" clicked="archive"}}
+          </div>
+        </div>
+      </div>
+
+      {{partial 'modal/footer'}}
+
+    </div>
+  </div>
 </div>
-<div class="modal-body" tabindex="-1">
-    <table class="card-details">
-        <tr><td>Card Name:</td><td>{{hover-aware-text-field model=model.name}}</td></tr>
-        <tr><td>Description:</td><td>{{hover-aware-text-area model=model.description}}</td></tr>
-        <tr><td>Created On:</td><td>{{model.createdAt}}</td></tr>
-        <tr><td>Current Column:</td><td>{{model.column.name}}</td></tr>
-        <tr><td>Comments:</td><td>{{hover-aware-text-area model=model.comments}}</td></tr>
-    </table>
-</div>
-<div class="modal-footer">
-  {{#bs-button type="primary" data-loading-text="Loading..." loading=loadingState title="Select" clicked="select" }}
-      <i class="fa fa-check-circle-o pull-left"></i>&nbsp;{{selectButtonText}}
-  {{/bs-button}}
-  {{#bs-button type="primary" title="Cancel" clicked="closeModal" }}
-      <i class="fa fa-times-circle-o pull-left"></i>&nbsp;{{cancelButtonText}}
-  {{/bs-button}}
-</div>
+

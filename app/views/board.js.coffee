@@ -1,6 +1,4 @@
-`import BasicView from 'appkit/views/basic'`
-
-BoardView = BasicView.extend({
+BoardView = Ember.View.extend({
   templateName: 'board',
   classNames: ['board'],
 })

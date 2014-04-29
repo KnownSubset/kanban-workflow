@@ -3,15 +3,9 @@ BoardsController = Ember.ArrayController.extend({
     addBoard: ->
       boards = @get('model')
       store = @get('store')
-      board = store.createRecord('board', {name: 'new board',createdAt: new Date()})
-      board.save()
-        .catch(Ember.Logger.error)
-        .then (board) ->
-          boards.pushObject(board)
+      model = store.createRecord('board', {name: 'new board'})
+      model.save().catch(Ember.Logger.error).then (board) -> boards.pushObject(board)
       false
-
-    remove: ->
-      @get('model').deleteRecord()
   }
 })
 

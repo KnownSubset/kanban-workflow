@@ -3,7 +3,7 @@
 
 HoverAwareTextArea = Ember.Component.extend(Hover, {
   classNames: ["editable_text_area"],
-  layoutName: "hover-aware-text-area",
+  layoutName: "components/hover-aware-text-area",
 
 });
 
