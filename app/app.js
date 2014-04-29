@@ -31,7 +31,7 @@ Board.FIXTURES = [
         name: 'Board #3',
         description: 'Curabitur tempus pulvinar ligula in consequat.',
         createdAt: Date(),
-        columns: [5,6,7]
+        columns: [5,6,7],
     }];
 
 Column.FIXTURES = [
@@ -49,17 +49,20 @@ Card.FIXTURES = [
         id:1,
         name: 'card #1',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget blandit orci. Integer consectetur mattis felis, ullamcorper mollis ligula hendrerit vitae. Sed rutrum odio et massa iaculis viverra. Curabitur enim urna, venenatis non volutpat ut, iaculis quis elit. Morbi at nulla blandit, eleifend ipsum eu, bibendum felis. Nulla eget lacus mauris. Etiam ullamcorper lectus vitae libero ultrices adipiscing. Praesent a lorem a sem accumsan ullamcorper. Aliquam ultrices non neque sed elementum. Maecenas egestas gravida ornare. Nunc mollis tortor eu urna gravida consequat.',
-        column: 1
+        column: 1,
+        comments: 'This is a comment'
     },{
         id:2,
         name: 'card #2',
         description: '',
-        column: 1
+        column: 1,
+        comments: 'This is another comment'
     },{
         id:3,
         name: 'card #3',
         description: 'short description',
-        column: 1
+        column: 1,
+        comments: 'This is yet another comment'
     },{
         id:4,
         name: 'card #4',

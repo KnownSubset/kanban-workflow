@@ -54,6 +54,14 @@ html, body {
 .editable-field {
     margin: 1px;
     padding: 6px 3px;
+    width: 100%;
+}
+
+.editable-area {
+    margin: 1px;
+    padding: 6px 3px;
+    width: auto;
+    resize: none;
 }
 
 span.input-group-addon {

@@ -5,6 +5,7 @@ Card = DS.Model.extend(Presence, {
   name: DS.attr('string'),
   description: DS.attr('string'),
   createdAt: DS.attr('date'),
+  comments: DS.attr('string')
 })
 
 `export default Card`
