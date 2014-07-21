@@ -36,7 +36,7 @@ FactoryGuy.define('board', {
 
 FactoryGuy.define('column', {
   sequences: {
-    name: (num) -> "board #{num}"
+    name: (num) -> "column #{num}"
     description: (num) -> "description #{num}"
   },
   default: {

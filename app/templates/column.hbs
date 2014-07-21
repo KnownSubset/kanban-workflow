@@ -2,8 +2,14 @@
 
 {{model.name}}
 
+{{#if isDragging}}
+  <div class="card placeholder">Drop to move here</div>
+{{/if}}
+
 {{#each model.cards itemController='card'}}
   {{#unless model.archived}}
     {{view 'card'}}
   {{/unless}}
 {{/each}}
+
+<br/>

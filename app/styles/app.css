@@ -48,6 +48,11 @@ html, body {
     min-width: 150px;
 }
 
+.dragged {
+    border-style: dashed;
+    border-color: darkgray;
+}
+
 .outlined {
     outline: white solid 1px;
 }
