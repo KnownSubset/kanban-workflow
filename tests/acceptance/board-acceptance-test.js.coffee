@@ -1,6 +1,6 @@
 `import KeyCodes from 'appkit/helpers/keyCodes'`
 
-[App, board, column, card, testHelper] = []
+[App, board, column, card, testHelper, users] = []
 
 module('Acceptances - Board', {
   setup: ->
@@ -9,8 +9,8 @@ module('Acceptances - Board', {
     store = testHelper.getStore()
     card = store.makeFixture('card')
     column = store.makeFixture('column', {cards: [card.id]})
-    board = store.makeFixture('board', {columns: [column.id]})
-    wait()
+    users = store.makeList('user', 3)
+    board = store.makeFixture('board', {columns: [column.id], members: [users[0].id,users[1].id,users[2].id]})
   teardown: ->
     Ember.run(App, 'destroy')
     Ember.run(testHelper, 'teardown')
@@ -70,5 +70,16 @@ test("User can archive a card", ->
     wait()
     wait()
     ok(not exists("div.card:contains('#{card.name}')"))
+)
+
+test("User can re-assign a card", ->
+  visit("/boards/#{board.id}")
+  click("button:contains('#{card.name}')")
+  click("div.modal .dropdown-toggle")
+  click("div.modal div.dropdown-menu div:contains('#{users[1].email}')")
+
+  andThen ->
+    ok(exists("div.modal:contains('Re-assigned to #{users[1].email}')"))
+    click("button:contains('Save')")
 )
 

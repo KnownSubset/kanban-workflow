@@ -46,6 +46,115 @@ FactoryGuy.define('column', {
   }
 })
 
+FactoryGuy.define('user',{
+  sequences: {
+    userName: (num) -> "User #{num}"
+    email: (num) -> "user#{num}@email.com"
+  },
+  default: {
+    email: FactoryGuy.generate('email')
+    directory: 1,
+  }
+})
+
+FactoryGuy.define('plan', {
+  default: {
+    name: "free_plan",
+    description: 'free plan',
+    capacity: 1000,
+    cost: 0
+  },
+  pro_plan: {
+    name: "big_plan",
+    description: 'big description',
+    capacity: 10000,
+    cost: 100
+  }
+  enterprise_plan: {
+    name: "enterprise_plan",
+    description: 'enterprise_plan description',
+    capacity: 100000,
+    cost: 100
+  }
+})
+
+FactoryGuy.define('account',{
+  default: {
+    customerId: "customer_id",
+    spaceUsed: 0,
+    plan: {}
+  }
+})
+
+FactoryGuy.define("organization",  {
+  sequences: {
+    name: (num) -> "organization #{num}"
+    description: (num) -> "organization #{num} description"
+  }
+
+  default: {
+    name: FactoryGuy.generate('name')
+    description: FactoryGuy.generate('description')
+  }
+})
+
+FactoryGuy.define("userGroup", {
+  sequences: {
+    name: (num) -> "User Group #{num}"
+    description: (num) -> "User Group #{num} description"
+  }
+
+  default: {
+    name: FactoryGuy.generate('name')
+    description: FactoryGuy.generate('description')
+  }
+  adminUserGroup: {
+    name: 'Admin User Group'
+  }
+})
+
+FactoryGuy.define("permission", {
+  sequences: {
+    name: (num) -> "permission #{num}"
+    description: (num) -> "permission #{num} description"
+  },
+  default: {
+    name: FactoryGuy.generate('name')
+    description: FactoryGuy.generate('description')
+  }
+})
+
+FactoryGuy.define("role", {
+  sequences: {
+    name: (num) -> "role #{num}"
+    description: (num) -> "role #{num} description"
+  },
+  default: {
+    name: FactoryGuy.generate('name')
+    description: FactoryGuy.generate('description')
+  }
+})
+
+FactoryGuy.define("directory", {
+  sequences: {
+    name: (num) -> "directory #{num}"
+    description: (num) -> "directory #{num} description"
+  },
+  default: {
+    name: FactoryGuy.generate('name')
+    description: FactoryGuy.generate('description')
+  }
+})
+
+FactoryGuy.define("invitation", {
+  sequences: {
+    email: (num) -> "invitation#{num}@email.com"
+  },
+  default: {
+    email: FactoryGuy.generate('email')
+  }
+})
+
 exports = {}
 
 `export default exports`

@@ -81,6 +81,40 @@ button.icon {
     border: 0;
 }
 
+.ember-select {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.dropdown-menu {
+    overflow: auto;
+    margin-top: -5px;
+}
+
+.dropdown-menu .select-elements {
+    max-height: 150px;
+    overflow:auto;
+}
+
+.select-item {
+    position: relative;
+    outline: none;
+    padding: 3px 1px;
+}
+
+.select-search {
+    margin: 0 2px;
+}
+
+.highlighted {
+    background-color: lightblue;
+}
+
+.select-choice {
+    height: 100%;
+    padding-bottom: 1px;
+}
+
 @keyframes domChanged { from { background: yellow; } }
 @-webkit-keyframes domChanged { from { background: yellow; } }
 .ember-view { animation: domChanged 1s; -webkit-animation: domChanged 1s; }

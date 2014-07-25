@@ -6,7 +6,7 @@
 #TODO: Update to use factory
 
 moduleForModel('card', '', {
-  needs: ['model:column', 'model:board', 'model:activityitem']
+  needs: ['model:column', 'model:board', 'model:activity-item','model:organization','model:directory','model:user-group','model:role','model:permission','model:account','model:user']
   setup: ->
     Board.FIXTURES = [
       {

@@ -37,8 +37,9 @@
             </div>
           </div>
           <div class="card-actions row col-md-2">
-            {{bs-button size="lg" block=true type='danger' icon='fa fa-trash-o' title="Delete" clicked="remove" }}
-            {{bs-button size="lg" block=true icon='fa fa-archive' title="Archive" clicked="archive"}}
+            <div class='row'>{{select-component model=model.column.board.members selections=assignees searchField='email' selectedOptionTemplate='option-view' optionTemplate='option-view' prompt='Assignee...' }}</div>
+            {{bs-button size="lg" block=true type='danger' icon='fa fa-trash-o fa-fw' title="Delete" clicked="remove" }}
+            {{bs-button size="lg" block=true icon='fa fa-archive fa-fw' title="Archive" clicked="archive"}}
           </div>
         </div>
       </div>

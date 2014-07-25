@@ -6,7 +6,7 @@
 #TODO: Update to use factory
 
 moduleForModel('board', '', {
-  needs: ['model:column','model:card'],
+  needs: ['model:column','model:card', 'model:organization','model:directory','model:user-group','model:role','model:permission','model:account','model:user' ],
   setup: ->
     Board.FIXTURES = [{ id: 1, name: 'Board #1', description: 'Proin diam eros', createdAt: Date(), columns: [1, 2, 3] }]
 

@@ -1,8 +1,4 @@
 import Resolver from 'ember/resolver';
-import Column from 'appkit/models/column';
-import Card from 'appkit/models/card';
-import Board from 'appkit/models/board';
-import Activityitem from 'appkit/models/activityitem';
 
 Ember.ENV.RAISE_ON_DEPRECATION = true;
 Ember.ENV.LOG_MODULE_RESOLVER = true;

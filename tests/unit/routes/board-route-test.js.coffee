@@ -4,7 +4,7 @@
 [store, testHelper, json] = []
 
 moduleFor('route:board', "{{route:board}}", {
-  needs: ['model:board', 'model:column', 'model:card']
+  needs: ['model:board', 'model:column', 'model:card','model:organization','model:directory','model:user-group','model:role','model:permission','model:account','model:user']
   setup: (container) ->
     fixtureStore(container)
     testHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin).setup({__container__: container})

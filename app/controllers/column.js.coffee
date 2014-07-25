@@ -6,7 +6,7 @@ ColumnController = Ember.Controller.extend({
     newSiblings.pushObject(card)
     card.set('column', column)
     activity = "Card moved to #{Ember.get(column, 'name')}"
-    record = store.createRecord('activityitem', {activity: activity, card: card})
+    record = store.createRecord('activity-item', {activity: activity, card: card})
     Ember.RSVP.all([record.save(), card.get('activityStream')]).then (promises) ->
       [activityItem, activityItems] = promises
       activityItems.pushObject(activityItem)

@@ -9,7 +9,6 @@ ApplicationRoute = Ember.Route.extend({
       if (controller)
         if (model) then controller.set('model', model)
         if (controller && controller.onShow) then controller.onShow()
-        controller.set('flashMessage', null)
 
     showCardModal: (name, model)->
       @showCardModal(@, name, model, card)

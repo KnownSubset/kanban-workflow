@@ -1,16 +1,98 @@
 `import Column from 'appkit/models/column'`
 `import Card from 'appkit/models/card'`
 `import Board from 'appkit/models/board'`
+`import User from 'appkit/models/user'`
+`import UserGroup from 'appkit/models/user-group'`
+`import Directory from 'appkit/models/directory'`
+`import Organization from 'appkit/models/organization'`
 
 ApplicationAdapter = DS.FixtureAdapter.extend();
 
 unless Ember.testing
+
+  User.FIXTURES = [{
+    id: 1,
+    email: 'n@r.com',
+    directories: [1, 2],
+    userGroups: [1, 2],
+    roles: [1, 2],
+    permissions: [1, 2],
+    boards: [1, 2, 3]
+  },{
+    id: 2,
+    email: '1@2.com',
+    directories: [1],
+    userGroups: [1],
+    roles: [1],
+    permissions: [1],
+    boards: [1, 2, 3]
+  },{
+    id: 3,
+    email: '3@4.com',
+    directories: [2],
+    userGroups: [2],
+    roles: [2],
+    permissions: [2],
+    boards: [1, 2, 3]
+  }]
+
+  Organization.FIXTURES = [{
+    id: 1,
+    name: 'Organization #1',
+    description: 'Organization #1 description',
+    directories: [1],
+    boards: [1,2]
+  },{
+    id: 2,
+    name: 'Organization #2',
+    description: 'Organization #2 description',
+    directories: [2],
+    boards: [3]
+  }]
+
+  Directory.FIXTURES = [{
+    id: 1,
+    name: 'Directory #1',
+    description: 'Directory #1 description',
+    directory: 1,
+    members: [1,2],
+    userGroups: [1]
+  },{
+    id: 2,
+    name: 'Directory #2',
+    description: 'Directory #2 description',
+    directory: 2,
+    members: [1,3],
+    userGroups: [1]
+  }]
+
+  UserGroup.FIXTURES = [{
+    id: 1,
+    name: 'user group #1',
+    description: 'user group #1 description',
+    members: [1, 2],
+    directory: 1,
+    roles: [1,2],
+    boards: [1]
+  },{
+    id: 2,
+    name: 'user group #2',
+    description: 'user group #2 description',
+    members: [1, 3],
+    directory: 2,
+    roles: [2],
+    boards: [1]
+  }]
+
   Board.FIXTURES = [{
     id: 1,
     name: 'Board #1',
     description: 'Proin diam eros, egestas quis laoreet ac, rutrum vitae risus. Integer et justo eu libero euismod lacinia ut a urna. Phasellus commodo ipsum consequat turpis convallis luctus ullamcorper sit amet metus.',
     createdAt: Date(),
-    columns: [1, 2, 3]
+    columns: [1, 2, 3],
+    members: [1, 2, 3],
+    organization: 1,
+    userGroups: [1,2],
   },{
     id: 2,
     name: 'Board #2',
@@ -25,7 +107,7 @@ unless Ember.testing
     columns: [5, 6, 7]
   }]
 
-  Column.FIXTURES = [{id: 1, name: 'column #1_1', kind: 'manual', createdAt: Date(), cards: [1, 2, 3, 10], board: 1 },
+  Column.FIXTURES = [{id: 1, name: 'column #1_1', kind: 'manual', createdAt: Date(), cards: [1, 2, 3, 10,11,12,13,14,15,16,17], board: 1 },
   {id: 2, name: 'column #1_2', kind: 'automated', createdAt: Date(), cards: [], board: 1 },
   {id: 3, name: 'column #1_3', kind: 'manual', createdAt: Date(), cards: [], board: 1 },
   {id: 4, name: 'column #2_1', kind: 'automated', createdAt: Date(), cards: [4, 5, 6], board: 2 },
@@ -94,7 +176,14 @@ unless Ember.testing
     description: 'short description',
     column: 1,
     archived: true
-  }
+  },
+  { id: 11, name: 'card #11', description: 'short description', column: 1 },
+  { id: 12, name: 'card #12', description: 'short description', column: 1 },
+  { id: 13, name: 'card #13', description: 'short description', column: 1 },
+  { id: 14, name: 'card #14', description: 'short description', column: 1 },
+  { id: 15, name: 'card #15', description: 'short description', column: 1 },
+  { id: 16, name: 'card #16', description: 'short description', column: 1 },
+  { id: 17, name: 'card #17', description: 'short description', column: 1 },
   ]
 
 
