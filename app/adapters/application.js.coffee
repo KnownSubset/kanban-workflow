@@ -22,7 +22,7 @@ unless Ember.testing
   },{
     id: 3,
     user: 3,
-    boards: [1, 2, 3]
+    boards: [1, 4, 2]
   }]
 
   User.FIXTURES = [{
@@ -34,14 +34,14 @@ unless Ember.testing
     permissions: [1, 2],
   },{
     id: 2,
-    email: '1@2.com',
+    email: 's@r.com',
     directories: [1],
     userGroups: [1],
     roles: [1],
     permissions: [1],
   },{
     id: 3,
-    email: '3@4.com',
+    email: 'e@r.com',
     directories: [2],
     userGroups: [2],
     roles: [2],
@@ -124,7 +124,7 @@ unless Ember.testing
     name: 'Board #4',
     description: 'Curabitur tempus pulvinar ligula in consequat.',
     createdAt: new Date(),
-    members: [1],
+    members: [1,3],
     columns: []
   }]
 

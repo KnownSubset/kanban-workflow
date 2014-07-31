@@ -1,6 +1,6 @@
-`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
 
-[App, testHelper, boards] = []
+[App, testHelper, boards, store] = []
 
 module('Acceptances - Boards', {
   setup: ->
@@ -12,7 +12,7 @@ module('Acceptances - Boards', {
     boards = store.makeList('board', random, {members: [profile.id]})
     store.makeList('board', random)
     profile.boards = boards.mapBy('id')
-    AuthenticatedUser.create({id: profile.id, email: profile.user.email, token: 'token', lastUpdated: 0}).save()
+    AuthenticatedUser.create({id: profile.id, email: 'fake@user.com', token: 'token', lastUpdated: 0}).save()
   teardown: ->
     Ember.run(App, 'destroy')
     Ember.run(testHelper, 'teardown')
@@ -38,4 +38,29 @@ test('click a board, visits that board', ->
     equal(find("div.board").length, 1, "only a single board should be displayed")
     equal(currentPath(), 'board', "path should be for board that was selected: #{board.name}")
     equal(currentURL(), "/boards/#{board.id}", "path should be for board that was selected: #{board.name}")
+)
+
+test('user can create a board, and then visit that board', ->
+  board = null
+  profile = store.makeFixture('profile')
+  AuthenticatedUser.create({id: profile.id, email: 'fake@user.com', token: 'token', lastUpdated: 0}).save()
+  Em.run ->
+    store.find('profile', profile.id).then (user) ->
+      profile = user
+  wait()
+
+  visit("/boards")
+  click("button:contains('Board')")
+  andThen ->
+    profile.get('boards').then (boards) ->
+      board = boards.get('firstObject')
+  wait()
+  andThen ->
+    click("div.board:contains('#{board.get('name')}')")
+
+  andThen ->
+    ok(find("div.board:contains('#{board.get('name')}')"), "board for #{board.get('name')} should exist")
+    equal(find("div.board").length, 1, "only a single board should be displayed")
+    equal(currentPath(), 'board', "path should be for board that was selected: #{board.get('name')}")
+    equal(currentURL(), "/boards/#{board.get('id')}", "path should be for board that was selected: #{board.get('name')}")
 )

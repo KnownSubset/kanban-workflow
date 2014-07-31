@@ -50,7 +50,7 @@ test("Creating a column should insert a div", () ->
 )
 
 test("template displays basically nothing if model is empty", ->
-  equal(view.$().text().trim(), '')
+  equal(view.$().text().trim(), 'Click to edit')
 )
 
 test("the name should be within the column", () ->

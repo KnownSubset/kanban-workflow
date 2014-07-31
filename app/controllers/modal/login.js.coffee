@@ -1,5 +1,5 @@
-`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
-`import LocalStorageHelper from 'appkit/helpers/local_storage'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
+`import LocalStorageHelper from 'appkit/helpers/local-storage'`
 
 LoginController = Ember.Controller.extend({
   needs: ['application'],

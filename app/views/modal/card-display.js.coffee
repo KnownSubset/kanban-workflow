@@ -1,4 +1,4 @@
-`import ModalBodyView from 'appkit/views/modal/modal_body'`
+`import ModalBodyView from 'appkit/views/modal/modal-body'`
 
 CardDisplayView = ModalBodyView.extend({
   templateName: 'modal/card_display',

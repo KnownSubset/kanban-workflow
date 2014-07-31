@@ -1,12 +1,4 @@
-###
-  A modal view for handling user logins
-
-  @class LoginView
-  @extends FullConnect.ModalBodyView
-  @namespace FullConnect
-  @module FullConnect
-###
-`import ModalBodyView from 'appkit/views/modal/modal_body'`
+`import ModalBodyView from 'appkit/views/modal/modal-body'`
 
 LoginView = ModalBodyView.extend({
   templateName: 'modal/login',

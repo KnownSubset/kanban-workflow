@@ -1,5 +1,5 @@
 `import ApplicationController from 'appkit/controllers/application'`
-`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
 `import { test, moduleFor } from 'ember-qunit'`
 
 [App,controller,testHelper] = []

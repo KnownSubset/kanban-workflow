@@ -1,5 +1,6 @@
 `import KeyCodes from 'appkit/helpers/keyCodes'`
-`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+`import factories from 'appkit/tests/factories/domain'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
 
 [App, board, column, card, testHelper, users, store] = []
 
@@ -41,10 +42,19 @@ test('User can add a column to the board', 1, ->
   click("div.board button:contains('Create Column')")
 
   andThen ->
-    columnElements = find('div.board div.column')
+    columns = find('div.board div.column')
 
-    equal(columnElements.length, 2, "there should be another column")
+    equal(columns.length, 2, "there should be another column")
+)
 
+test('User can add a card to the board', 1, ->
+  visit("/boards/#{board.id}")
+  click("div.board div.column:first div.addCard")
+
+  andThen ->
+    cards = find('div.board div.column div.card')
+
+    equal(cards.length, 2, "there should be another column")
 )
 
 test("User can update the board's name", 1, ->

@@ -1,7 +1,7 @@
 `import { test, moduleFor } from 'ember-qunit'`
 `import Board from 'appkit/models/board'`
 `import BoardsRoute from 'appkit/routes/boards'`
-`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
 `import AuthenticatedRoute from 'appkit/mixins/authenticated-route'`
 
 [App, store, testHelper, json] = []

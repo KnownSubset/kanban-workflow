@@ -31,7 +31,7 @@
               <div class='col-md-3'>Activity:</div>
               <div class='col-md-9'>
                 {{#each activity in model.activityStream}}
-                  Some user made changes - {{activity.date}} {{activity.activity}}<br/>
+                  {{activity.actor.user.email}} - {{activity.date}} {{activity.activity}}<br/>
                 {{/each}}
               </div>
             </div>

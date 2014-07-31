@@ -1,4 +1,4 @@
-`import LocalStorageHelper from 'appkit/helpers/local_storage'`
+`import LocalStorageHelper from 'appkit/helpers/local-storage'`
 
 OrganizationAdapter = DS.RESTAdapter.extend({
   corsWithCredentials: true

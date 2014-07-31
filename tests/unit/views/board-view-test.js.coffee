@@ -52,7 +52,7 @@ test("Creating a board should insert a div", () ->
 test("template displays basically nothing if model is empty", ->
   trimmedText = view.$().text().trim()
 
-  trimmedText = trimmedText.replace(text, '') for text in ['Click to edit', 'Create Column', 'Create Card']
+  trimmedText = trimmedText.replace(text, '') for text in ['Click to edit', 'Create Column']
 
   equal(trimmedText.trim(), '')
 )
@@ -153,11 +153,4 @@ test("There should be a div for each column in the board", () ->
   wait()
 
   equal(find('.column').length, board.columns.length)
-)
-
-test("Creating a card should insert a div", () ->
-  click("button:contains('Create Card')")
-
-  andThen ->
-    equal(controller.get('sendArray.firstObject'), 'addCard', "The controller should have been sent the addCard action")
 )

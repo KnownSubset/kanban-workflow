@@ -1,5 +1,5 @@
 `import Alertable from 'appkit/mixins/alertable'`
-`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
 
 ApplicationController = Ember.Controller.extend(Alertable, {
   actions: {

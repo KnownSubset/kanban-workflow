@@ -1,5 +1,5 @@
 `import AuthenticatedRoute from 'appkit/mixins/authenticated-route'`
-`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
 
 BoardsRoute = Ember.Route.extend(AuthenticatedRoute, {
   model: ->

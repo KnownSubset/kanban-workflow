@@ -1,8 +1,9 @@
 `import { test, moduleFor } from 'ember-qunit'`
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
 
 [controller, store, App, card, column, testHelper, member] = []
 
-moduleFor("controller:modal/card_display", "Modal - Card Display Controller", {
+moduleFor("controller:modal/card-display", "Modal - Card Display Controller", {
   needs: ['controller:modal']
   setup: ->
     App = startApp()
@@ -13,6 +14,7 @@ moduleFor("controller:modal/card_display", "Modal - Card Display Controller", {
     board = store.makeFixture('board', {members: [member.id]})
     column = store.makeFixture('column', {board: board})
     card = store.makeFixture('card', {column: column})
+    AuthenticatedUser.create({id: member.id, email: 'fake@user.com', token: 'token', lastUpdated: 0}).save()
     Em.run -> Em.RSVP.all([store.find('card', card.id), store.find('column', column.id)]).then (items) ->
       [card, column] = items
       controller.set('model', card)
@@ -64,18 +66,21 @@ test("Updating a card adds an activityItem", () ->
 )
 
 test("Reassigning a card adds an activityItem", () ->
-  user = null
+  profile = null
   Em.run ->
-    store.find('profile', member.id).then (member) -> user = member
+    store.find('profile', member.id).then (member) -> profile = member
   wait()
 
-  andThen -> controller.send('reassign', user)
+  andThen -> controller.send('reassign', profile)
 
   andThen ->
     card.get('activityStream').then (stream) ->
       equal(stream.get('length'), 1, 'A new activity should have been added')
-      user.get('user').then (user) ->
-        ok(stream.isAny('activity', "Re-assigned to #{user.get('email')}"), "Re-assigned to #{user.get('email')} was not found")
+      profile.get('user').then (user) ->
+        activity = stream.get('lastObject')
+        equal(activity.get('activity'), "Re-assigned to #{user.get('email')}", "Re-assigned to #{user.get('email')} was not found")
+        activity.get('actor').then (actor) ->
+          equal(actor.get('id'), member.id, "Re-assigned to #{user.get('email')} was not found")
 )
 
 test("Reassigning a card sets the user as the assignee of the card", () ->

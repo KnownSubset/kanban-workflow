@@ -1,3 +1,5 @@
+`import AuthenticatedUser from 'appkit/authentications/authenticated-user'`
+
 CardDetailsController = Ember.Controller.extend({
   needs: ['modal'],
   title: 'Card Details',
@@ -37,8 +39,10 @@ CardDetailsController = Ember.Controller.extend({
       Ember.RSVP.Promise.resolve(model.get('assignee')).then (assignee) ->
         return if Ember.guidFor(assignee) is Ember.guidFor(profile)
         model.set('assignee', profile)
-        profile.get('user').then (user) ->
-          record = store.createRecord('activity-item', {date: new Date(), activity: "Re-assigned to #{user.get('email')}", card: model})
+        currentUser = AuthenticatedUser.current()
+        Em.RSVP.all([store.find('profile', currentUser.get('id')),profile.get('user')]).then (promises) ->
+          [profile, user] = promises
+          record = store.createRecord('activity-item', {date: new Date(), actor: profile, activity: "Re-assigned to #{user.get('email')}", card: model})
           Em.RSVP.all([model.get('activityStream'), record.save()]).then((promises) ->
             [stream, activity]=promises
             stream.addObject(activity)

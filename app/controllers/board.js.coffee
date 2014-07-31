@@ -7,7 +7,7 @@ BoardController = Ember.Controller.extend({
       column = store.createRecord('column', {name: 'column', kind:'manual', createdAt: new Date(), board: board})
       Em.RSVP.all([board.get('columns'), column.save()]).then (promises) ->
         [columns, column] = promises
-        #columns.pushObject(column)
+        columns.pushObject(column)
       false
 
     remove: (column) ->

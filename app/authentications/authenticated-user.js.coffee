@@ -1,5 +1,5 @@
 `import Singleton from 'appkit/mixins/singleton'`
-`import LocalStorageHelper from 'appkit/helpers/local_storage'`
+`import LocalStorageHelper from 'appkit/helpers/local-storage'`
 
 AuthenticatedUser = Ember.Object.extend({
   loggedIn: ( ->
