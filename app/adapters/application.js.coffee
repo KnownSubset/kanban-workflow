@@ -2,6 +2,7 @@
 `import Card from 'appkit/models/card'`
 `import Board from 'appkit/models/board'`
 `import User from 'appkit/models/user'`
+`import Profile from 'appkit/models/profile'`
 `import UserGroup from 'appkit/models/user-group'`
 `import Directory from 'appkit/models/directory'`
 `import Organization from 'appkit/models/organization'`
@@ -10,6 +11,20 @@ ApplicationAdapter = DS.FixtureAdapter.extend();
 
 unless Ember.testing
 
+  Profile.FIXTURES = [{
+    id: 1,
+    user: 1,
+    boards: [1, 2, 3, 4]
+  },{
+    id: 2,
+    user: 2,
+    boards: [1, 2, 3]
+  },{
+    id: 3,
+    user: 3,
+    boards: [1, 2, 3]
+  }]
+
   User.FIXTURES = [{
     id: 1,
     email: 'n@r.com',
@@ -17,7 +32,6 @@ unless Ember.testing
     userGroups: [1, 2],
     roles: [1, 2],
     permissions: [1, 2],
-    boards: [1, 2, 3]
   },{
     id: 2,
     email: '1@2.com',
@@ -25,7 +39,6 @@ unless Ember.testing
     userGroups: [1],
     roles: [1],
     permissions: [1],
-    boards: [1, 2, 3]
   },{
     id: 3,
     email: '3@4.com',
@@ -33,7 +46,6 @@ unless Ember.testing
     userGroups: [2],
     roles: [2],
     permissions: [2],
-    boards: [1, 2, 3]
   }]
 
   Organization.FIXTURES = [{
@@ -88,7 +100,7 @@ unless Ember.testing
     id: 1,
     name: 'Board #1',
     description: 'Proin diam eros, egestas quis laoreet ac, rutrum vitae risus. Integer et justo eu libero euismod lacinia ut a urna. Phasellus commodo ipsum consequat turpis convallis luctus ullamcorper sit amet metus.',
-    createdAt: Date(),
+    createdAt: new Date(),
     columns: [1, 2, 3],
     members: [1, 2, 3],
     organization: 1,
@@ -97,14 +109,23 @@ unless Ember.testing
     id: 2,
     name: 'Board #2',
     description: 'Quisque vitae magna urna. In hac habitasse platea dictumst. Etiam feugiat arcu arcu, ac fermentum tortor iaculis nec. Nullam mattis semper risus. Pellentesque consectetur feugiat erat, eu auctor erat bibendum blandit. Nam et eros tempus sem imperdiet ultrices a eget urna. Duis elementum nisi dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam vitae massa et risus vestibulum imperdiet. Suspendisse potenti. Curabitur pretium, turpis vitae feugiat molestie, nulla nunc consequat nibh, nec fringilla ipsum nisl vel est. Sed aliquam eros vel erat eleifend, eget pharetra est dictum. Aliquam erat volutpat. Phasellus arcu enim, fermentum a sapien non, porttitor aliquet mauris. Ut sit amet diam fringilla, placerat tortor eu, mattis risus.',
-    createdAt: Date(),
+    createdAt: new Date(),
+    members: [1, 3],
     columns: [4]
   },{
     id: 3,
     name: 'Board #3',
     description: 'Curabitur tempus pulvinar ligula in consequat.',
-    createdAt: Date(),
+    createdAt: new Date(),
+    members: [1, 2],
     columns: [5, 6, 7]
+  },{
+    id: 4,
+    name: 'Board #4',
+    description: 'Curabitur tempus pulvinar ligula in consequat.',
+    createdAt: new Date(),
+    members: [1],
+    columns: []
   }]
 
   Column.FIXTURES = [{id: 1, name: 'column #1_1', kind: 'manual', createdAt: Date(), cards: [1, 2, 3, 10,11,12,13,14,15,16,17], board: 1 },

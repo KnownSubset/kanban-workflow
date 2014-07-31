@@ -4,7 +4,7 @@ Board = DS.Model.extend({
   createdAt: DS.attr('date'),
   columns: DS.hasMany('column', {async: true}),
   organization: DS.belongsTo('organization', {async: true}),
-  members: DS.hasMany('user', {async: true, inverse: 'boards'}),
+  members: DS.hasMany('profile', {async: true, inverse: 'boards'}),
   userGroups: DS.hasMany('user-group', { async: true, inverse: 'boards' }),
 })
 

@@ -1,3 +1,5 @@
+`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+
 [App, testHelper, boards] = []
 
 module('Acceptances - Boards', {
@@ -6,7 +8,11 @@ module('Acceptances - Boards', {
     testHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin).setup(App)
     store = testHelper.getStore()
     random = Math.floor(Math.random() * 6) + 1
-    boards = store.makeList('board', random)
+    profile = store.makeFixture('profile')
+    boards = store.makeList('board', random, {members: [profile.id]})
+    store.makeList('board', random)
+    profile.boards = boards.mapBy('id')
+    AuthenticatedUser.create({id: profile.id, email: profile.user.email, token: 'token', lastUpdated: 0}).save()
   teardown: ->
     Ember.run(App, 'destroy')
     Ember.run(testHelper, 'teardown')
@@ -24,7 +30,8 @@ test('click a board, visits that board', ->
   board = boards[0]
 
   visit("/boards")
-  click("div.board:contains('#{board.name}')")
+  andThen ->
+    click("div.board:contains('#{board.name}')")
 
   andThen ->
     ok(find("div.board:contains('#{board.name}')"), "board for #{board.name} should exist")

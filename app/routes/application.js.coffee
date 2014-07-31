@@ -1,6 +1,8 @@
+`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+
 ApplicationRoute = Ember.Route.extend({
 
-  actions:
+  actions: {
     showModal: (name, model) ->
       @controllerFor('modal').set('modalClass', null)
       controller = @controllerFor('modal/'+name);
@@ -10,8 +12,17 @@ ApplicationRoute = Ember.Route.extend({
         if (model) then controller.set('model', model)
         if (controller && controller.onShow) then controller.onShow()
 
-    showCardModal: (name, model)->
-      @showCardModal(@, name, model, card)
+    showLogin: -> @send('showModal', 'login')
 
-});
+    closeModal: ->
+      @render('modal/hide_modal', {into: 'modal/modal', outlet: 'modalBody'})
+      @disconnectOutlet({outlet: 'modal', parentView: 'application'})
+
+    showCardModal: (name, model) ->
+      @showCardModal(@, name, model, card)
+  }
+
+  model: ->  AuthenticatedUser.current()
+
+})
 `export default ApplicationRoute`

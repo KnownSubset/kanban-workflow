@@ -1,8 +1,8 @@
 Singleton = Ember.Mixin.create({
-  current: ->
-    unless this._current then this._current = this.createCurrent() else this._current
-  createCurrent: ->
-    this.create {}
+  current: () ->
+    this._current = this.createCurrent() unless this._current?
+    this._current
+  createCurrent:  -> this.create({})
   currentProp: (property, value) ->
     instance = this.current()
     if not instance? then return

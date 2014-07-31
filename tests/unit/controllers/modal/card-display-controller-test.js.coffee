@@ -1,6 +1,6 @@
 `import { test, moduleFor } from 'ember-qunit'`
 
-[controller, store, App, card, column, testHelper, members] = []
+[controller, store, App, card, column, testHelper, member] = []
 
 moduleFor("controller:modal/card_display", "Modal - Card Display Controller", {
   needs: ['controller:modal']
@@ -9,8 +9,8 @@ moduleFor("controller:modal/card_display", "Modal - Card Display Controller", {
     testHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin).setup(App)
     store = testHelper.getStore()
     controller = @subject({store: store})
-    members = store.makeList('user', 1)
-    board = store.makeFixture('board', {members: [members[0].id]})
+    member = store.makeFixture('profile')
+    board = store.makeFixture('board', {members: [member.id]})
     column = store.makeFixture('column', {board: board})
     card = store.makeFixture('card', {column: column})
     Em.run -> Em.RSVP.all([store.find('card', card.id), store.find('column', column.id)]).then (items) ->
@@ -66,7 +66,7 @@ test("Updating a card adds an activityItem", () ->
 test("Reassigning a card adds an activityItem", () ->
   user = null
   Em.run ->
-    store.find('user', members[0].id).then (member) -> user = member
+    store.find('profile', member.id).then (member) -> user = member
   wait()
 
   andThen -> controller.send('reassign', user)
@@ -74,13 +74,14 @@ test("Reassigning a card adds an activityItem", () ->
   andThen ->
     card.get('activityStream').then (stream) ->
       equal(stream.get('length'), 1, 'A new activity should have been added')
-      ok(stream.isAny('activity', "Re-assigned to #{user.get('email')}"), "Re-assigned to #{user.get('email')} was not found")
+      user.get('user').then (user) ->
+        ok(stream.isAny('activity', "Re-assigned to #{user.get('email')}"), "Re-assigned to #{user.get('email')} was not found")
 )
 
 test("Reassigning a card sets the user as the assignee of the card", () ->
   user = null
   Em.run ->
-    store.find('user', members[0].id).then (member) -> user = member
+    store.find('profile', member.id).then (member) -> user = member
   wait()
 
   andThen -> controller.send('reassign', user)

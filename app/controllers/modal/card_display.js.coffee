@@ -11,7 +11,7 @@ CardDetailsController = Ember.Controller.extend({
   assigneeWatcher: ( ->
     assignees = @get('assignees')
     Ember.RSVP.Promise.resolve(@get('model.assignee')).then (assignee) ->
-      if not Ember.isBlank(assignees)
+      unless Ember.isBlank(assignees)
         assignees.removeAt(0)
       return unless assignee?
       if Ember.isBlank(assignees)
@@ -31,17 +31,18 @@ CardDetailsController = Ember.Controller.extend({
         Em.RSVP.all(items).then (activities) -> stream.pushObjects(activities)
       ).then => @send('closeModal')
 
-    reassign: (user) ->
+    reassign: (profile) ->
       model = @get('model')
       store = @get('store')
       Ember.RSVP.Promise.resolve(model.get('assignee')).then (assignee) ->
-        return if Ember.guidFor(assignee) is Ember.guidFor(user)
-        model.set('assignee', user)
-        record = store.createRecord('activity-item', {date: new Date(), activity: "Re-assigned to #{user.get('email')}", card: model})
-        Em.RSVP.all([model.get('activityStream'), record.save()]).then((promises) ->
-          [stream, activity]=promises
-          stream.addObject(activity)
-        )
+        return if Ember.guidFor(assignee) is Ember.guidFor(profile)
+        model.set('assignee', profile)
+        profile.get('user').then (user) ->
+          record = store.createRecord('activity-item', {date: new Date(), activity: "Re-assigned to #{user.get('email')}", card: model})
+          Em.RSVP.all([model.get('activityStream'), record.save()]).then((promises) ->
+            [stream, activity]=promises
+            stream.addObject(activity)
+          )
 
     archive: ->
       model = @get('model')

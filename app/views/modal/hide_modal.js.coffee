@@ -12,7 +12,7 @@ HideModalView = ModalBodyView.extend({
   # No rendering!
   render: ((buffer) -> ),
   didInsertElement: ->
-    $('#fullConnect-modal').modal('hide');
+    $('#modal').modal('hide');
 });
 
 `export default HideModalView`

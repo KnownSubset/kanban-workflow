@@ -2,13 +2,13 @@ ModalBodyView = Ember.View.extend({
 
   # Focus on first element
   didInsertElement: () ->
-    $fullConnect_modal = $('#fullConnect-modal');
+    $fullConnect_modal = $('#modal');
     $fullConnect_modal.modal('show');
     $fullConnect_modal.show();
     $('.modal').fadeIn();
 
     controller = this.get('controller');
-    $fullConnect_modal.on('hide.fullConnect', (() -> controller.send('closeModal')) );
+    $fullConnect_modal.on('hide#modal', (() -> controller.send('closeModal')) );
 
     $('#modal-alert').hide();
 
@@ -17,11 +17,9 @@ ModalBodyView = Ember.View.extend({
 
     title = this.get('title');
     if (title) then this._parentView.set('title', title)
-  ,
 
   willDestroyElement: ->
-    $('#fullConnect-modal').off('hide.fullConnect');
-  ,
+    $('#modal').off('hide#modal');
 
   # Pass the errors to our errors view
   displayErrors: (errors, callback) ->

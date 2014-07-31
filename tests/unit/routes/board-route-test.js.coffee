@@ -1,4 +1,6 @@
 `import { test, moduleFor, moduleForComponent, moduleForModel } from 'ember-qunit'`
+`import AuthenticatedUser from 'appkit/authentication/authenticated-user'`
+`import AuthenticatedRoute from 'appkit/mixins/authenticated-route'`
 `import BoardRoute from 'appkit/routes/board'`
 
 [store, testHelper, json] = []
@@ -6,21 +8,24 @@
 moduleFor('route:board', "{{route:board}}", {
   needs: ['model:board', 'model:column', 'model:card','model:organization','model:directory','model:user-group','model:role','model:permission','model:account','model:user']
   setup: (container) ->
-    fixtureStore(container)
-    testHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin).setup({__container__: container})
+    App = startApp()
+    testHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin).setup(App)
     store = testHelper.getStore()
-    json = store.makeFixture('board')
+    route = @subject({store: store})
+    user = store.makeFixture('profile')
+    json = store.makeFixture('board', members: [user.id])
+    AuthenticatedUser.create({id: user.id, token: 'token', lastUpdated: 0}).save()
+    wait()
   teardown: ->
     Em.run(testHelper, 'teardown')
 });
-
-#TODO: updateActivity tests, show modal/close modal tests
 
 test("it exists", ->
   route = this.subject()
   ok(route)
   ok(route instanceof Ember.Route)
   ok(route instanceof BoardRoute)
+  ok(AuthenticatedRoute.detect(route))
 )
 
 test("#model", ->

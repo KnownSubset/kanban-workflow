@@ -1,5 +1,5 @@
 ModalView = Ember.View.extend({
-  elementId: 'fullConnect-modal',
+  elementId: 'modal',
   templateName: 'modal/modal',
   classNameBindings: [':modal-dialog', 'controller.modalClass']
 });

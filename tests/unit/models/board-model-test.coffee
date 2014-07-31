@@ -1,24 +1,23 @@
 `import { test, moduleFor, moduleForComponent, moduleForModel } from 'ember-qunit'`
-`import Column from 'appkit/models/column'`
-`import Card from 'appkit/models/card'`
 `import Board from 'appkit/models/board'`
 
-#TODO: Update to use factory
+[store, columns, board, App, testHelper] = []
 
 moduleForModel('board', '', {
-  needs: ['model:column','model:card', 'model:organization','model:directory','model:user-group','model:role','model:permission','model:account','model:user' ],
   setup: ->
-    Board.FIXTURES = [{ id: 1, name: 'Board #1', description: 'Proin diam eros', createdAt: Date(), columns: [1, 2, 3] }]
+    App = startApp()
+    testHelper = Ember.Object.createWithMixins(FactoryGuyTestMixin).setup(App)
+    store = testHelper.getStore()
+    board = store.makeFixture('board')
+    columns = store.makeList('column', 3, {board: board})
+    board.columns = columns.mapBy('id')
 
-    Column.FIXTURES = [
-        {id:1, name: 'column #1_1', kind: 'manual', createdAt: Date(), cards: [], board: 1 },
-        {id:2, name: 'column #1_2', kind: 'automated', createdAt: Date(), cards: [], board: 1 },
-        {id:3, name: 'column #1_3', kind: 'manual', createdAt: Date(), cards: [], board: 1 }
-        ]
+  teardown: ->
+    Em.run(App, 'destroy')
+    Em.run(testHelper, 'teardown')
 })
 
 test("Board is a valid ember-data Model", ->
-  store = this.store()
   Em.run ->  store.find('board', 1).then (board) ->
     ok(board)
     ok(board instanceof DS.Model)
@@ -26,8 +25,7 @@ test("Board is a valid ember-data Model", ->
 )
 
 test("able to load the details for a board", ->
-  store = this.store()
-  Em.run -> store.find('board', 1).then (board) ->
+  Em.run -> store.find('board', board.id).then (board) ->
     fixture = Board.FIXTURES[0]
     equal(board.get('name'), fixture.name)
     equal(board.get('description'), fixture.description)
@@ -35,8 +33,7 @@ test("able to load the details for a board", ->
 )
 
 test("able to load the relationships for columns", ->
-  store = this.store()
-  Em.run -> store.find('board', 1).then (board) ->
+  Em.run -> store.find('board', board.id).then (board) ->
     Ember.RSVP.resolve(board.get('columns'))
       .then (columns) -> Ember.RSVP.resolve(columns.get('firstObject').get('board'))
 

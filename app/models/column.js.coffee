@@ -1,6 +1,4 @@
-`import Presence from 'appkit/mixins/presence'`
-
-Column = DS.Model.extend(Presence, {
+Column = DS.Model.extend({
   name: DS.attr('string'),
   kind: DS.attr('string'),
   createdAt: DS.attr('date'),

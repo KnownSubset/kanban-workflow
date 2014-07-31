@@ -1,6 +1,4 @@
-`import Presence from 'appkit/mixins/presence'`
-
-BasicController = Ember.Controller.extend(Presence, {
+BasicController = Ember.Controller.extend({
   alerts: [],
   actions:
     alert: (alert)->

@@ -1,0 +1,29 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      {{partial 'modal/header'}}
+
+      <div class="modal-body">
+        <form class='login-form' method='post'>
+          <div class="input-group center">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            {{view Ember.TextField value=email type="email" class='email form-control' autocorrect="off" autocapitalize="off" autofocus="autofocus" placeholder='Email Address'}}
+          </div>
+          <br>
+          <div class="input-group center">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            {{view Ember.TextField value=password type="password" class='password form-control'  placeholder='Password'}}
+          </div>
+        </form>
+        {{authMessage}}
+        <div {{bind-attr class="alertClass"}}>{{alert}}</div>
+      </div>
+      <div class="modal-footer">
+        {{#if authenticate}} Authenticating... {{/if}}
+        {{bs-button size='lg' type="primary" clicked="login" icon='fa fa-sign-in' disabled=loginDisabled title=loginButtonText}}
+      </div>
+
+    </div>
+  </div>
+</div>

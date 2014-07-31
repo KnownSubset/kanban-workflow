@@ -1,6 +1,6 @@
 `import KeyCodes from 'appkit/helpers/keyCodes'`
 
-Valid = Em.Mixin.create({
+Valid = Ember.Mixin.create({
   classNameBindings: ['hasInvalidContent:invalid'],
   focused: false,
   hasInvalidContent: false,

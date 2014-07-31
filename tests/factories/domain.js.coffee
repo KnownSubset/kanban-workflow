@@ -52,8 +52,13 @@ FactoryGuy.define('user',{
     email: (num) -> "user#{num}@email.com"
   },
   default: {
-    email: FactoryGuy.generate('email')
-    directory: 1,
+    email: FactoryGuy.generate('email'),
+    imageUrl: 'http://x.annihil.us/u/prod/marvel/i/mg/3/a0/537ba3793915b/standard_xlarge.jpg',
+  }
+})
+FactoryGuy.define('profile',{
+  default: {
+    user: {}
   }
 })
 
@@ -75,14 +80,6 @@ FactoryGuy.define('plan', {
     description: 'enterprise_plan description',
     capacity: 100000,
     cost: 100
-  }
-})
-
-FactoryGuy.define('account',{
-  default: {
-    customerId: "customer_id",
-    spaceUsed: 0,
-    plan: {}
   }
 })
 

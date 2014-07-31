@@ -1,0 +1,35 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      {{#unless complete}}
+        {{partial 'modal/header'}}
+
+        <div class="modal-body">
+          <form>
+            <div class="input-group center">
+              <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+              {{valid-input-text-field value=email loseFocusOnTab=false matchesPatternClass="valid-text" doesNotMatchPatternClass="invalid-text" pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-zA-Z]{2,6}(?:\.[a-zA-Z]{2})?)$" showOnNoMatch=true type="email" class='email form-control' autocorrect="off" autocapitalize="off" autofocus="autofocus" placeholder='Email Address' popoverContainer=".modal-body" popoverContent="Email is invalid"}}
+            </div>
+            <br>
+
+            <div class="input-group center">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              {{input value=password type="password" class='password form-control' placeholder='Password'}}
+            </div>
+            <br>
+
+            <div class="input-group center">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              {{input value=passwordConfirmation type="password" class='password form-control' placeholder='Password Confirmation'}}
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          {{bs-button size='lg' type="primary" clicked="createAccount" icon='fa fa-sign-in' disabled=submitDisabled title='Sign Up'}}
+        </div>
+      {{/unless}}
+
+    </div>
+  </div>
+</div>

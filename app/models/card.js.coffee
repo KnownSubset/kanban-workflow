@@ -1,5 +1,5 @@
 Card = DS.Model.extend({
-  assignee: DS.belongsTo('user', { async: true }),
+  assignee: DS.belongsTo('profile', { async: true }),
   column: DS.belongsTo('column', {async: true}),
   name: DS.attr('string'),
   archived: DS.attr('boolean', {defaultValue: false}),
