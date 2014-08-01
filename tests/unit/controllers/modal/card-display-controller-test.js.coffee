@@ -39,8 +39,12 @@ test("Archiving a card adds an activity item to the store", () ->
 
   andThen ->
     ok(card.get('archived'), 'the card should be archived')
-    card.get('activityStream').then (activityItems) ->
-      ok(activityItems.isAny('activity', 'Card was archived!'), 'activity was not found')
+    card.get('activityStream').then (stream) ->
+      equal(stream.get('length'), 1, 'A new activity should have been added')
+      activity = stream.get('lastObject')
+      equal(activity.get('activity'), "Card was archived!", 'The card activity should be "Card was archived!"')
+      activity.get('actor').then (actor) ->
+        equal(actor.get('id'), member.id, "Should have been archived by #{member.id}")
 )
 
 test("Removing a card removes it from the column it belongs to", () ->
@@ -62,7 +66,10 @@ test("Updating a card adds an activityItem", () ->
   andThen ->
     card.get('activityStream').then (stream) ->
       equal(stream.get('length'), 1, 'A new activity should have been added')
-      ok(stream.isAny('activity', "description"), 'The card activity should be "Card description updated"')
+      activity = stream.get('lastObject')
+      equal(activity.get('activity'), "updated: description", 'The card activity should be "Card description updated"')
+      activity.get('actor').then (actor) ->
+        equal(actor.get('id'), member.id, "Should have been updated by #{member.id}")
 )
 
 test("Reassigning a card adds an activityItem", () ->

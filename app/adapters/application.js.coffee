@@ -11,90 +11,14 @@ ApplicationAdapter = DS.FixtureAdapter.extend();
 
 unless Ember.testing
 
-  Profile.FIXTURES = [{
-    id: 1,
-    user: 1,
-    boards: [1, 2, 3, 4]
-  },{
-    id: 2,
-    user: 2,
-    boards: [1, 2, 3]
-  },{
-    id: 3,
-    user: 3,
-    boards: [1, 4, 2]
-  }]
+  Profile.FIXTURES = [
+    { id: 1, user: 1, boards: [1, 2, 3, 4] },
+    { id: 2, user: 2, boards: [1, 2, 3] },
+    { id: 3, user: 3, boards: [1, 4, 2] },
+  ]
+  marvelCharacters = ({ id: ndx, user: ndx, boards: [1, 2, 3, 4] } for ndx in [4..32])
 
-  User.FIXTURES = [{
-    id: 1,
-    email: 'n@r.com',
-    directories: [1, 2],
-    userGroups: [1, 2],
-    roles: [1, 2],
-    permissions: [1, 2],
-  },{
-    id: 2,
-    email: 's@r.com',
-    directories: [1],
-    userGroups: [1],
-    roles: [1],
-    permissions: [1],
-  },{
-    id: 3,
-    email: 'e@r.com',
-    directories: [2],
-    userGroups: [2],
-    roles: [2],
-    permissions: [2],
-  }]
-
-  Organization.FIXTURES = [{
-    id: 1,
-    name: 'Organization #1',
-    description: 'Organization #1 description',
-    directories: [1],
-    boards: [1,2]
-  },{
-    id: 2,
-    name: 'Organization #2',
-    description: 'Organization #2 description',
-    directories: [2],
-    boards: [3]
-  }]
-
-  Directory.FIXTURES = [{
-    id: 1,
-    name: 'Directory #1',
-    description: 'Directory #1 description',
-    directory: 1,
-    members: [1,2],
-    userGroups: [1]
-  },{
-    id: 2,
-    name: 'Directory #2',
-    description: 'Directory #2 description',
-    directory: 2,
-    members: [1,3],
-    userGroups: [1]
-  }]
-
-  UserGroup.FIXTURES = [{
-    id: 1,
-    name: 'user group #1',
-    description: 'user group #1 description',
-    members: [1, 2],
-    directory: 1,
-    roles: [1,2],
-    boards: [1]
-  },{
-    id: 2,
-    name: 'user group #2',
-    description: 'user group #2 description',
-    members: [1, 3],
-    directory: 2,
-    roles: [2],
-    boards: [1]
-  }]
+  Profile.FIXTURES = Profile.FIXTURES.concat(marvelCharacters)
 
   Board.FIXTURES = [{
     id: 1,
@@ -102,7 +26,7 @@ unless Ember.testing
     description: 'Proin diam eros, egestas quis laoreet ac, rutrum vitae risus. Integer et justo eu libero euismod lacinia ut a urna. Phasellus commodo ipsum consequat turpis convallis luctus ullamcorper sit amet metus.',
     createdAt: new Date(),
     columns: [1, 2, 3],
-    members: [1, 2, 3],
+    members: [1, 2, 3].concat([4..31]),
     organization: 1,
     userGroups: [1,2],
   },{
@@ -110,21 +34,21 @@ unless Ember.testing
     name: 'Board #2',
     description: 'Quisque vitae magna urna. In hac habitasse platea dictumst. Etiam feugiat arcu arcu, ac fermentum tortor iaculis nec. Nullam mattis semper risus. Pellentesque consectetur feugiat erat, eu auctor erat bibendum blandit. Nam et eros tempus sem imperdiet ultrices a eget urna. Duis elementum nisi dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam vitae massa et risus vestibulum imperdiet. Suspendisse potenti. Curabitur pretium, turpis vitae feugiat molestie, nulla nunc consequat nibh, nec fringilla ipsum nisl vel est. Sed aliquam eros vel erat eleifend, eget pharetra est dictum. Aliquam erat volutpat. Phasellus arcu enim, fermentum a sapien non, porttitor aliquet mauris. Ut sit amet diam fringilla, placerat tortor eu, mattis risus.',
     createdAt: new Date(),
-    members: [1, 3],
+    members: [1, 3].concat([4..31]),
     columns: [4]
   },{
     id: 3,
     name: 'Board #3',
     description: 'Curabitur tempus pulvinar ligula in consequat.',
     createdAt: new Date(),
-    members: [1, 2],
+    members: [1, 2].concat([4..31]),
     columns: [5, 6, 7]
   },{
     id: 4,
     name: 'Board #4',
     description: 'Curabitur tempus pulvinar ligula in consequat.',
     createdAt: new Date(),
-    members: [1,3],
+    members: [1,3].concat([4..31]),
     columns: []
   }]
 

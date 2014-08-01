@@ -68,7 +68,7 @@ test("a login attempt will return a RSVP.Promise", () ->
 )
 
 test("a successful login attempt will save the user's token to current instance", () ->
-  userData = {id: 1, email: 'roger@rabbit.com', token: 'token', lastUpdated: 0}
+  userData = {id: 1, email: 'roger@rabbit.com', token: 'token', imageUrl: '', lastUpdated: 0}
   ic.ajax.defineFixture("#{ENV.organization_api}/sessions.json", { response: userData, jqXHR: {}, textStatus: 'success' })
   LocalStorageHelper.set('current_user', null)
   AuthenticatedUser._current = null

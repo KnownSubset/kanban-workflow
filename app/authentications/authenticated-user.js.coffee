@@ -8,6 +8,7 @@ AuthenticatedUser = Ember.Object.extend({
   ).property('token'),
   token: '',
   email: '',
+  imageUrl: '',
   directory: '',
   lastUpdated: 0
 
@@ -41,7 +42,7 @@ AuthenticatedUser.reopenClass(Singleton, {
       data: { user: {email: email, password: password} },
       type: 'POST'
     }).then((result) ->
-      user = AuthenticatedUser.create({id: result.id, email: email, token: result.token, lastUpdated: 0})
+      user = AuthenticatedUser.create({id: result.id, email: email, imageUrl: result.imageUrl, token: result.token, lastUpdated: 0})
       user.save()
     )
   refresh: ()->

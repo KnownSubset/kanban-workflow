@@ -27,10 +27,13 @@ CardDetailsController = Ember.Controller.extend({
     save: ->
       model = @get('model')
       store = @get('store')
-      model.get('activityStream').then((stream) ->
-        items = for key of model.changedAttributes()
-          store.createRecord('activity-item', {date: new Date(), activity: key, card: model}).save()
-        Em.RSVP.all(items).then (activities) -> stream.pushObjects(activities)
+      currentUser = AuthenticatedUser.current()
+      Em.RSVP.all([store.find('profile', currentUser.get('id')),model.get('activityStream')]).then( (promises) ->
+        [profile, stream] = promises
+        items = (key for key of model.changedAttributes())
+        activity = "updated: #{items.join(',')}"
+        store.createRecord('activity-item', {date: new Date(), actor: profile, activity: activity, card: model}).save().then (activityItem) ->
+          stream.pushObject(activityItem)
       ).then => @send('closeModal')
 
     reassign: (profile) ->
@@ -52,10 +55,12 @@ CardDetailsController = Ember.Controller.extend({
       model = @get('model')
       store = @get('store')
       model.set('archived', true)
-      record = store.createRecord('activity-item', {date: new Date(), activity: 'Card was archived!', card: model})
-      Em.RSVP.all([model.get('activityStream'), record.save()]).then((promises) ->
-        [stream, activity]=promises
-        stream.addObject(activity)
+      currentUser = AuthenticatedUser.current()
+      store.find('profile', currentUser.get('id')).then((profile) ->
+        record = store.createRecord('activity-item', {date: new Date(), actor: profile, activity: 'Card was archived!', card: model})
+        Em.RSVP.all([model.get('activityStream'), record.save()]).then (promises) ->
+          [stream, activity]=promises
+          stream.addObject(activity)
       ).then => @send('closeModal')
 
     remove: ->
