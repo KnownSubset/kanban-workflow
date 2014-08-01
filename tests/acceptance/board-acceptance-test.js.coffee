@@ -94,7 +94,8 @@ test("User can re-assign a card", ->
       click("div.modal div.dropdown-menu div.select-element:contains('#{user.get('email')}')")
     andThen ->
       ok(exists("div.modal:contains('Re-assigned to #{user.get('email')}')"))
-      click("button:contains('Save')")
+      click("button:contains('Cancel')")
+      wait()
 )
 
 test("User will be redirected if they are not a member of the board", ->

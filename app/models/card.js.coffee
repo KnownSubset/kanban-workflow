@@ -5,7 +5,6 @@ Card = DS.Model.extend({
   archived: DS.attr('boolean', {defaultValue: false}),
   description: DS.attr('string'),
   createdAt: DS.attr('date'),
-  comments: DS.attr('string'),
   activityStream: DS.hasMany('activity-item', {async: true})
 })
 

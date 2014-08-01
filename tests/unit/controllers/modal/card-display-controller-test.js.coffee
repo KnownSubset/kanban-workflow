@@ -24,7 +24,7 @@ moduleFor("controller:modal/card-display", "Modal - Card Display Controller", {
     Em.run(testHelper, 'teardown')
 })
 
-test("Removing a card deletes it from the store", () ->
+test("Removing a card deletes it from the store", ->
   Em.run -> controller.send('remove')
 
   andThen ->
@@ -32,7 +32,7 @@ test("Removing a card deletes it from the store", () ->
     ok(card.get('isDeleted'), 'the card should be marked for deletion, but we can still access it until we call card.save()')
 )
 
-test("Archiving a card adds an activity item to the store", () ->
+test("Archiving a card adds an activity item to the store", ->
   Em.run ->
     controller.send('archive')
     wait()
@@ -47,7 +47,7 @@ test("Archiving a card adds an activity item to the store", () ->
         equal(actor.get('id'), member.id, "Should have been archived by #{member.id}")
 )
 
-test("Removing a card removes it from the column it belongs to", () ->
+test("Removing a card removes it from the column it belongs to", ->
   Em.run -> controller.send('remove')
 
   andThen ->
@@ -56,8 +56,9 @@ test("Removing a card removes it from the column it belongs to", () ->
       ok(card.get('isDeleted'), 'the only card should have been removed')
 )
 
-test("Updating a card adds an activityItem", () ->
+test("Updating a card adds an activityItem", ->
   Em.run ->
+    card.set('name', "asdfasdf")
     card.set('description', "asdfasdf")
 
     controller.send('save')
@@ -67,12 +68,55 @@ test("Updating a card adds an activityItem", () ->
     card.get('activityStream').then (stream) ->
       equal(stream.get('length'), 1, 'A new activity should have been added')
       activity = stream.get('lastObject')
-      equal(activity.get('activity'), "updated: description", 'The card activity should be "Card description updated"')
+      equal(activity.get('activity'), "Updated: name, description", 'The card activity should say that the card name & description were updated')
       activity.get('actor').then (actor) ->
         equal(actor.get('id'), member.id, "Should have been updated by #{member.id}")
 )
 
-test("Reassigning a card adds an activityItem", () ->
+test("Save button is not enabled until something changes", ->
+  Em.run ->
+    ok(controller.get('disableSubmit') )
+    card.set('name', "asdfasdf")
+    ok(not controller.get('disableSubmit') )
+
+    card.rollback()
+    ok(controller.get('disableSubmit') )
+    card.set('description', "asdfasdf")
+    ok(not controller.get('disableSubmit') )
+
+    card.rollback()
+    ok(controller.get('disableSubmit') )
+    controller.set('comments', "asdfasdf")
+    ok(not controller.get('disableSubmit') )
+)
+
+test("Saving a card without updating does not add an activityItem", ->
+  Em.run ->
+    controller.send('save')
+    wait()
+
+  andThen ->
+    card.get('activityStream').then (stream) ->
+      equal(stream.get('length'), 0, 'A new activity should NOT have been added')
+)
+
+test("User can add comments to a card by adding an activityItem", ->
+  Em.run ->
+    controller.set('comments', "asdfasdf")
+
+    controller.send('save')
+    wait()
+
+  andThen ->
+    card.get('activityStream').then (stream) ->
+      equal(stream.get('length'), 1, 'A new activity should have been added')
+      activity = stream.get('lastObject')
+      equal(activity.get('activity'), "Commented: asdfasdf", 'The comments should have been added via card activities')
+      activity.get('actor').then (actor) ->
+        equal(actor.get('id'), member.id, "Should have been updated by #{member.id}")
+)
+
+test("Reassigning a card adds an activityItem", ->
   profile = null
   Em.run ->
     store.find('profile', member.id).then (member) -> profile = member
@@ -90,7 +134,7 @@ test("Reassigning a card adds an activityItem", () ->
           equal(actor.get('id'), member.id, "Re-assigned to #{user.get('email')} was not found")
 )
 
-test("Reassigning a card sets the user as the assignee of the card", () ->
+test("Reassigning a card sets the user as the assignee of the card", ->
   user = null
   Em.run ->
     store.find('profile', member.id).then (member) -> user = member
@@ -103,7 +147,7 @@ test("Reassigning a card sets the user as the assignee of the card", () ->
       equal(assignee.get('id'), user.get('id'), 'The card was not reassigned')
 )
 
-test("Cancelling out will revert the card", () ->
+test("Cancelling out will revert the card", ->
   Em.run ->
     card.set('name', "asdfasdf")
     card.set('description', "asdfasdf")

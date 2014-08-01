@@ -3,6 +3,14 @@
 CardDetailsController = Ember.Controller.extend({
   needs: ['modal'],
   title: 'Card Details',
+  comments: '',
+
+  disableSubmit: Ember.computed('comments', 'model.name', 'model.description', ->
+    model = @get('model')
+    items = (key for key of model.changedAttributes())
+    comments = @get('comments')
+    Em.isBlank(items) and Em.isBlank(comments)
+  )
 
   assigneesWatcher: ( ->
     Ember.run.once =>
@@ -26,15 +34,20 @@ CardDetailsController = Ember.Controller.extend({
 
     save: ->
       model = @get('model')
+      items = (key for key of model.changedAttributes())
+      comments = @get('comments')
+      return if @get('saveEnabled')
       store = @get('store')
-      currentUser = AuthenticatedUser.current()
-      Em.RSVP.all([store.find('profile', currentUser.get('id')),model.get('activityStream')]).then( (promises) ->
+      Ember.RSVP.all([store.find('profile', AuthenticatedUser.current().get('id')),model.get('activityStream')]).then( (promises) ->
         [profile, stream] = promises
-        items = (key for key of model.changedAttributes())
-        activity = "updated: #{items.join(',')}"
-        store.createRecord('activity-item', {date: new Date(), actor: profile, activity: activity, card: model}).save().then (activityItem) ->
-          stream.pushObject(activityItem)
-      ).then => @send('closeModal')
+        activities = []
+        activities.push(store.createRecord('activity-item', {date: new Date(), actor: profile, activity: "Updated: #{items.join(', ')}", card: model}).save()) unless Em.isBlank(items)
+        activities.push(store.createRecord('activity-item', {date: new Date(), actor: profile, activity: "Commented: #{comments}", card: model}).save()) unless Em.isBlank(comments)
+        Ember.RSVP.all(activities).then (activityItems) ->
+          stream.pushObjects(activityItems)
+      ).then =>
+        @set('comments', '')
+        @send('closeModal')
 
     reassign: (profile) ->
       model = @get('model')
@@ -76,6 +89,7 @@ CardDetailsController = Ember.Controller.extend({
       false
 
     cancel: ->
+      this.set('comments', '')
       this.get('model').rollback()
       this.send('closeModal')
   }
