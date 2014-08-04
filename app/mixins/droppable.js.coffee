@@ -9,20 +9,20 @@ Droppable = Em.Mixin.create({
   dragEnter: (event) ->
     event.stopPropagation()
     event.preventDefault()
-    Em.run (-> @set('controller.isDragging', true)).bind(@)
+    @set('controller.isDragging', true)
     @createDropEffect(event, true)
     return
   dragOver: (event) ->
     event.stopPropagation()
     event.preventDefault()
-    Em.run (-> @set('controller.isDragging', true)).bind(@)
+    @set('controller.isDragging', true)
     @createDropEffect(event, true)
     return
   dragLeave: (event) ->
     event.stopPropagation()
     event.preventDefault()
     dragging = @isDragging(event)
-    Em.run (-> @set('controller.isDragging', dragging)).bind(@)
+    Ember.run (-> @set('controller.isDragging', dragging)).bind(@)
     @createDropEffect(event, dragging)
     return
   drop: (event) ->
@@ -31,7 +31,7 @@ Droppable = Em.Mixin.create({
     return false unless @get('controller.isDragging')
     models = event.dataTransfer.getData('draggable.model.id')
     @get('controller').send('dropped', [models])
-    Em.run (-> @set('controller.isDragging', false)).bind(@)
+    Ember.run (-> @set('controller.isDragging', false)).bind(@)
     @createDropEffect(event, false)
     return
 })

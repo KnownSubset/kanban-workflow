@@ -3,7 +3,15 @@
     <div class='col-md-9'><h2 id='title'>Welcome to your workflow manager</h2></div>
     <div class='col-md-2 col-md-offset-1'>
       {{#if model }}
-        <button type="button" class="btn btn-default" {{action 'logout'}}><div class="row">{{thumbnail-component model=model.imageUrl}} {{model.email}}</div></button>
+        <div class="input-group">
+          <span class="input-group-btn">
+            {{thumbnail-component model=model.imageUrl disabled='disabled'}}
+          </span>
+          <span class='form-control'>{{model.email}}</span>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-block" {{action 'logout'}}><i class='fa fa-sign-out'></i></button>
+          </span>
+        </div>
       {{ else }}
         <button type="button" class="btn btn-default" {{action 'showLogin'}}><i class="fa fa-sign-in"></i> Sign in</button>
       {{/if}}

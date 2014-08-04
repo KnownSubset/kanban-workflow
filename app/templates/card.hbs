@@ -2,9 +2,10 @@
   <div class='col-md-9 col-sm-8'>
     <button class='icon' {{action 'showCardDetails' model}}><i class='fa fa-search'></i> {{model.name}}</button>
   </div>
-  <div class='col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1'>
+  <div class='col-md-offset-2 col-md-1 col-sm-offset-2 col-sm-1'>
     <button class='icon' {{action 'remove'}}><i class='fa fa-times-circle-o'></i></button>
   </div>
 </div>
-<br>
-<div>{{description}}</div>
+<div class='row'>
+  <div class='col-md-12'>{{description}}</div>
+</div>

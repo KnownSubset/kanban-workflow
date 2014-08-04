@@ -1,7 +1,7 @@
 <div class="row">
   <div {{action "remove" this}} class="col-md-1"><i class="fa fa-times-circle-o fa-lg fa-fw"></i></div>
   <div class="col-md-8">{{hover-aware-text-field model=model.name}}</div>
-  <div {{action "addCard" this}} class="col-md-1 addCard"><i class="fa fa fa-plus-circle fa-lg fa-fw"></i></div>
+  <div {{action "addCard" this}} class="col-md-1 col-md-offset-1 addCard"><i class="fa fa fa-plus-circle fa-lg fa-fw"></i></div>
 </div>
 {{#if isDragging}}
   <div class="card placeholder">Drop to move here</div>

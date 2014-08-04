@@ -6,8 +6,8 @@ ColumnView = Ember.View.extend(Droppable, {
   classNames: ['column'],
   isDragging: (event) ->
     dropTarget = $(event.target).parents('.column.droppable')
-    dropTargetIsCurrentView = dropTarget.length is 1 and dropTarget.attr('id') is @get('elementId')
-    dropTargetIsCurrentView and $('div.card.dragged').length is 1
+    dropTargetIsCurrentView = not Ember.isBlank(dropTarget) and dropTarget.attr('id') is @get('elementId')
+    dropTargetIsCurrentView and not Ember.isBlank($('div.card.dragged'))
 
 })
 

@@ -25,7 +25,12 @@ html, body {
     border-color: #000000;
     float: left;
     color: black;
-    minwidth: 200px;
+    min-width: 200px;
+}
+
+.column .row, .card .row {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .modal-content {

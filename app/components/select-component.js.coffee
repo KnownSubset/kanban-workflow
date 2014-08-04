@@ -88,9 +88,7 @@ SelectComponent = Ember.Component.extend({
       else
         selections.addObject(selection)
       @set('showDropdown', false)
-}
-
-
+  }
 })
 
 `export default SelectComponent`
